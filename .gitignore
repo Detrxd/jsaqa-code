@@ -1,0 +1,36 @@
+#
+
+
+/7.3/jest/node_modules
+/7.3/playwright/node_modules
+/7.3/playwright/user.js
+/7.3/playwright/screen/
+
+/7.4/puppeteer/node_modules
+
+/7.5/puppeteer-2/node_modules
+
+/7.6/cypress/node_modules
+/7.6/node_modules
+/7.6_1/node_modules
+/7.6_1/cypress/node_modules
+/7.6_1/cypress/e2e
+/7.6_1/cypress/video
+/7.6_1/package-lock.json
+/7.6_1/cypress/fixtures/example.json
+
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+booksApp/yarn.lock
+booksApp/package.json
