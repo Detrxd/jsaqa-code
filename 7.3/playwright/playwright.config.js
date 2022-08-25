@@ -1,10 +1,7 @@
 const config = {
   use: {
     headless: false,
-    viewport: { width: 1280, height: 720 },
-    ignoreHTTPSErrors: true,
-    video: "on-first-retry",
+    SloMo: 10000,
   },
 };
-
 module.exports = config;
