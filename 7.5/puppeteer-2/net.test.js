@@ -1,10 +1,17 @@
-const { clickElement, putText, getText } = require("./lib/commands.js");
-const { generateName } = require("./lib/util.js");
+const {
+  clickElement,
+  bookingSomeChairs,
+  successBooking,
+} = require("./lib/commands.js");
 
 let page;
+let day = ".page-nav > a:nth-child(3)";
+let time = "a.movie-seances__time";
+let button = "button.acceptin-button";
 
 beforeEach(async () => {
   page = await browser.newPage();
+  await page.goto("http://qamid.tmweb.ru/client/index.php");
   await page.setDefaultNavigationTimeout(0);
 });
 
@@ -12,44 +19,44 @@ afterEach(() => {
   page.close();
 });
 
-describe("Netology.ru tests", () => {
+describe("Бронирование билетов в театр", () => {
   beforeEach(async () => {
     page = await browser.newPage();
-    await page.goto("https://netology.ru");
+    await page.goto("http://qamid.tmweb.ru/client/index.php");
   });
 
-  test("The first test'", async () => {
-    const title = await page.title();
-    console.log("Page title: " + title);
-    await clickElement(page, "header a + a");
-    const title2 = await page.title();
-    console.log("Page title: " + title2);
-    const pageList = await browser.newPage();
-    await pageList.goto("https://netology.ru/navigation");
-    await pageList.waitForSelector("h1");
+  test("Успешное бронирование одного билета в кино", async () => {
+    await bookingSomeChairs(page, day, time, button, "chair 3");
+    await successBooking(
+      page,
+      "После оплаты билет будет доступен в этом окне, а также придёт вам на почту. Покажите QR-код нашему контроллёру у входа в зал."
+    );
   });
 
-  test("The first link text 'Медиа Нетологии'", async () => {
-    const actual = await getText(page, "header a + a");
-    expect(actual).toContain("Медиа Нетологии");
+  test("Успешное бронирование двух билетов в кино", async () => {
+    await bookingSomeChairs(page, day, time, button, "chair 7", "chair 8");
+    await successBooking(
+      page,
+      "После оплаты билет будет доступен в этом окне, а также придёт вам на почту. Покажите QR-код нашему контроллёру у входа в зал."
+    );
   });
 
-  test("The first link leads on 'Медиа' page", async () => {
-    await clickElement(page, "header a + a");
-    const actual = await getText(page, ".logo__media");
-    await expect(actual).toContain("Медиа");
+  test("Негативная проверка бронирования билета в кино", async () => {
+    await bookingSomeChairs(page, day, time, button, "chair 2");
+    await successBooking(
+      page,
+      "После оплаты билет будет доступен в этом окне, а также придёт вам на почту. Покажите QR-код нашему контроллёру у входа в зал."
+    );
+    await page.goto("http://qamid.tmweb.ru/client/index.php");
+    await clickElement(page, day);
+    await clickElement(page, time);
+    await clickElement(page, "chair 2");
+    expect(
+      String(
+        await page.$eval("button", (button) => {
+          return button.disabled;
+        })
+      )
+    ).toContain("true");
   });
-});
-
-test("Should look for a course", async () => {
-  await page.goto("https://netology.ru/navigation");
-  await putText(page, "input", "тестировщик");
-  const actual = await page.$eval("a[data-name]", (link) => link.textContent);
-  const expected = "Тестировщик ПО";
-  expect(actual).toContain(expected);
-});
-
-test("Should show warning if login is not email", async () => {
-  await page.goto("https://netology.ru/?modal=sign_in");
-  await putText(page, 'input[type="email"]', generateName(5));
 });

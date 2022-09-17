@@ -1,28 +1,27 @@
+const { clickElement, getText } = require("./util.js");
+
 module.exports = {
-  clickElement: async function (page, selector) {
-    try {
-      await page.waitForSelector(selector);
-      await page.click(selector);
-    } catch (error) {
-      throw new Error(`Selector is not clickable: ${selector}`);
+  bookingSomeChairs: async function (
+    page,
+    day,
+    time,
+    button,
+    ...chairSelector
+  ) {
+    await clickElement(page, day);
+    await clickElement(page, time);
+    for (let i = 0; i < chairSelector.length; i++) {
+      await clickElement(
+        page,
+        `.buying-scheme__row > span:nth-child(${chairSelector[i]
+          .split(" ")
+          .pop()})`
+      );
     }
+    await clickElement(page, button);
   },
-  getText: async function (page, selector) {
-    try {
-      await page.waitForSelector(selector);
-      return await page.$eval(selector, (link) => link.textContent);
-    } catch (error) {
-      throw new Error(`Text is not available for selector: ${selector}`);
-    }
-  },
-  putText: async function (page, selector, text) {
-    try {
-      const inputField = await page.$(selector);
-      await inputField.focus();
-      await inputField.type(text);
-      await page.keyboard.press("Enter");
-    } catch (error) {
-      throw new Error(`Not possible to type text for selector: ${selector}`);
-    }
+  successBooking: async function (page, text) {
+    const actual = await getText(page, "p.ticket__hint");
+    expect(actual).toContain(text);
   },
 };
