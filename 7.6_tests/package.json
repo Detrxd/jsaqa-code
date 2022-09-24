@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "cypress runs": "cypress open --config-file cypress.config.js",
+    "cypress iphone": "cypress open --config-file cypress.env.config.js",
+    "test:headlessEdge": "cypress run --headless --browser edge --spec cypress/integration/login.cy.js",
+    "test:headdedEdge": "cypress run --headed --browser edge --spec cypress/integration/login.cy.js",
+    "test:headlessElectron": "cypress run --headless --browser electron --spec cypress/integration/login.cy.js",
+    "test:headdedElectron": "cypress run --headed --browser electron --spec cypress/integration/login.cy.js"
+  },
+  "devDependencies": {
+    "cypress": "^10.8.0"
+  }
+}

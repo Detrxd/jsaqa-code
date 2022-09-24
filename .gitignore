@@ -34,3 +34,5 @@
 *.vsix
 booksApp/yarn.lock
 booksApp/package.json
+7.6_tests/cypress/videos/login.cy.js.mp4
+7.6_tests/cypress/integration/login.cy.js
