@@ -1,3 +1,4 @@
+
 Feature: Бронирование билетов
     Scenario: Успешное бронирование одного билета
         Given Пользователь находится на странице 'http://qamid.tmweb.ru/client/index.php'

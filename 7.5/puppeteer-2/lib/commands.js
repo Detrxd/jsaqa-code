@@ -1,4 +1,6 @@
 const { clickElement, getText } = require("./util.js");
+const chai = require("chai");
+const expect = chai.expect;
 
 module.exports = {
   bookingSomeChairs: async function (
@@ -22,6 +24,6 @@ module.exports = {
   },
   successBooking: async function (page, text) {
     const actual = await getText(page, "p.ticket__hint");
-    expect(actual).toContain(text);
+    expect(actual).contain(text);
   },
 };
