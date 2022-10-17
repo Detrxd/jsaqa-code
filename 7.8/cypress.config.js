@@ -1,6 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  projectId: 'ni8agc',
   e2e: {
     specPattern: [
       "cypress/integration/folder1/*.cy.{js,jsx,ts,tsx}",
