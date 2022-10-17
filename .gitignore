@@ -18,6 +18,8 @@
 /7.6_1/cypress/video
 /7.6_1/package-lock.json
 /7.6_1/cypress/fixtures/example.json
+/7.7_tests/node_modules
+
 
 
 .vscode/*
@@ -36,3 +38,12 @@ booksApp/yarn.lock
 booksApp/package.json
 7.6_tests/cypress/videos/login.cy.js.mp4
 7.6_tests/cypress/integration/login.cy.js
+
+#
+
+/7.8/node_modules
+/7.8/cypress/node_modules
+/7.8/cypress/fixtures/example.json
+/7.8/cypress/discPage/e2e
+/7.8/cypress/video
+/7.8/package-lock.json
